@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="bg-[black] text-[white] flex">
+    <nav className="bg-[black] text-[white] flex justify-around items-center py-6">
       {/* Logo */}
-      <img src="/vite.svg" alt="Vite logo" className="logo" />
+      <img src="./logo.jpg" alt="Vite logo" className="w-32" />
       {/* Links */}
-      <ul>
+      <ul className="flex gap-8 text-[#9CA3AF]">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -24,9 +24,13 @@ export default function Navbar() {
         </li>
       </ul>
       {/* Buttons */}
-      <div className="">
-        <button className="btn">Login</button>
-        <button className="btn">Sign Up</button>
+      <div className="space-x-4">
+        <button className="border border-[#00FF94] rounded-md px-5 py-1 hover:bg-[#00FF94] cursor-pointer">
+          Login
+        </button>
+        <button className="bg-[#00FF94] rounded-md px-5 py-1 text-black hover:bg-transparent border border-[#00FF94] hover:text-white cursor-pointer ">
+          Sign Up
+        </button>
       </div>
     </nav>
   );

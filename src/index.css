@@ -1,4 +1,6 @@
-@import "tailwindcss"; 
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap'); 
  :root {
   background-color: #0A0A0A;
+  font-family: "Onest", sans-serif;
 }
