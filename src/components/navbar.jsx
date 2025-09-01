@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <nav className="bg-[black] text-[white] flex justify-around items-center py-6">
       {/* Logo */}
-      <img src="./logo.jpg" alt="Vite logo" className="w-32" />
+      <img src="./logo.jpg" alt="Vite logo" className="w-32 rounded" />
       {/* Links */}
       <ul className="flex gap-8 text-[#9CA3AF]">
         <li>
