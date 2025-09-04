@@ -126,33 +126,45 @@ const listings = [
   },
 ];
 
+const ITEMS_PER_PAGE = 6;
 
 const ListingPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [currentPage, setCurrentPage] = useState(3); // Default to page 3
-  const totalPages = 5;
+  const totalPages = Math.ceil(listings.length / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentListings = listings.slice(startIndex, endIndex);
 
   return (
-    <div className="max-w-7xl mx-auto p-6 text-white">
-      <h2 className="text-2xl font-bold mb-4">245 Properties Found</h2>
-      <FilterBar />
-      <div className="flex justify-end mb-4">
-        <select className="border px-3 py-2 rounded">
-          <option>Sort Newest First</option>
-        </select>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {listings.map((listing, index) => (
-          <PropertyCard key={index} {...listing} />
-        ))}
-      </div>
-      <div className=" mt-8 bg-[#1A1A1A] text-white">
-        {/* Your property cards would go here */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 text-white">
+      <div className="space-y-4 sm:space-y-6">
+        <h2 className="text-xl sm:text-2xl font-bold">
+          {listings.length} Properties Found
+        </h2>
+
+        <FilterBar />
+
+        <div className="flex justify-end">
+          <select className="border px-2 py-1.5 sm:px-3 sm:py-2 rounded text-sm sm:text-base">
+            <option>Sort Newest First</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {currentListings.map((listing, index) => (
+            <PropertyCard key={index} {...listing} />
+          ))}
+        </div>
+
+        <div className="mt-6 sm:mt-8 bg-[#1A1A1A] text-white">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       </div>
     </div>
   );
