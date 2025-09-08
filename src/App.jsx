@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./MainLayout/MainLayout";
 import Home from "./pages/Home/home";
 import ListingPage from "./pages/searchResultPage/page";
+import VirtualInspection from "./pages/virtualInspection/page";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +19,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/searchResult" element={<ListingPage />} />
+          <Route path="/vi" element={<VirtualInspection />} />
         </Route>
       </Routes>
     </BrowserRouter>
