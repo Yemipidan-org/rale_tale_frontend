@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Lock, CreditCard, Banknote, Wallet } from "lucide-react";
 
-export default function ScheduleViewingForm() {
+export default function ScheduleViewingForm(props) {
   const [paymentMethod, setPaymentMethod] = useState("visa");
 
   return (
@@ -106,6 +106,9 @@ export default function ScheduleViewingForm() {
         <button
           type="submit"
           className="w-full py-3 mt-2 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-black font-semibold flex items-center justify-center gap-2"
+          onClick={() => {
+            props.setPaymentSuccessFull(true);
+          }}
         >
           <Lock className="w-4 h-4" />
           Pay ₦4,000 Now

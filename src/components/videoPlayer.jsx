@@ -41,7 +41,7 @@ const CustomVideoPlayer = () => {
   };
 
   return (
-    <div className="bg-black rounded-xl overflow-hidden relative w-full max-w-4xl   shadow-lg">
+    <div className="bg-black rounded-xl overflow-hidden relative w-full max-w-4xl shadow-lg">
       {/* Video */}
       <video
         ref={videoRef}
