@@ -7,6 +7,8 @@ import MainLayout from "./MainLayout/MainLayout";
 import Home from "./pages/Home/home";
 import ListingPage from "./pages/searchResultPage/page";
 import VirtualInspection from "./pages/virtualInspection/page";
+import Login from "./pages/login/page";
+import Register from "./pages/signup/page";
 
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
           <Route path="/searchResult" element={<ListingPage />} />
           <Route path="/vi" element={<VirtualInspection />} />
         </Route>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

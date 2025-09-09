@@ -43,12 +43,12 @@ export default function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex space-x-4">
-            <button className="border border-[#00FF94] rounded-md px-5 py-1 hover:bg-[#00FF94] hover:text-black transition">
+            <Link to={"/login"} className="border border-[#00FF94] rounded-md px-5 py-1 hover:bg-[#00FF94] hover:text-black transition">
               Login
-            </button>
-            <button className="bg-[#00FF94] rounded-md px-5 py-1 text-black hover:bg-transparent border border-[#00FF94] hover:text-white transition">
+            </Link>
+            <Link to={"/signup"} className="bg-[#00FF94] rounded-md px-5 py-1 text-black hover:bg-transparent border border-[#00FF94] hover:text-white transition">
               Sign Up
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
