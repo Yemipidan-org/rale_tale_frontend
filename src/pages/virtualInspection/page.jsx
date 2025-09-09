@@ -4,10 +4,11 @@ import ScheduleViewingForm from "./component/form";
 
 export default function VirtualInspection() {
   return (
-    <div className="p-8 flex gap-3 bg-[#121212] min-h-screen">
-      <div className="flex flex-col gap-6 md:gap-8">
+    // Use column layout on small screens and row on md+; ensure full-width stacking
+    <div className="p-4 md:p-8 flex flex-col md:flex-row gap-6 md:gap-3 w-full bg-[#121212] min-h-screen items-start">
+      <div className="flex-1 flex flex-col gap-6 md:gap-8 w-full">
         <CustomVideoPlayer />
-        <div className="bg-[#161616] p-6 rounded-md">
+        <div className="bg-[#161616] p-6 rounded-md w-full">
           <div className="mb-4">
             <h1 className="text-white text-[24px] font-semibold">
               Luxury Penthouse Suite

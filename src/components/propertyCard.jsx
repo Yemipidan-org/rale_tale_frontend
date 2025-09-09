@@ -1,5 +1,6 @@
 // components/RealEstateCard.jsx
 import { Video, Calendar, MapPin, Bed, Bath } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PropertyCard = ({ image, title, location, price, size }) => {
   return (
@@ -32,10 +33,11 @@ const PropertyCard = ({ image, title, location, price, size }) => {
             <Calendar size={14} />
             Book Inspection - ₦4,000
           </button>
-          <button className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 text-xs sm:text-sm rounded hover:bg-gray-100 w-full sm:w-auto">
+          {/* <Link to="/" className="hover:text-white"> */}
+          <Link to="/vi" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 text-xs sm:text-sm rounded hover:bg-gray-100 w-full sm:w-auto">
             <Video size={14} />
             Virtual Tour
-          </button>
+          </Link>
         </div>
       </div>
     </div>

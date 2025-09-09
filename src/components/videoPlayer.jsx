@@ -55,9 +55,9 @@ const CustomVideoPlayer = () => {
       {/* Controls */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 flex flex-col px-3 py-2">
         {/* Top-right globe button */}
-        <button className="absolute top-2 right-2 text-white hover:text-gray-300">
+        {/* <button className="absolute top-2 right-2 text-white hover:text-gray-300">
           <Globe size={20} />
-        </button>
+        </button> */}
 
         {/* Progress Bar */}
         <div

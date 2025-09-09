@@ -6,7 +6,7 @@ export default function ScheduleViewingForm() {
   const [paymentMethod, setPaymentMethod] = useState("visa");
 
   return (
-    <div className="max-w mx-auto bg-[#161616] text-white p-6 rounded-2xl shadow-md">
+    <div className="w-full md:w-[30%] bg-[#161616] text-white p-4 md:p-6 rounded-2xl shadow-md">
       {/* Title */}
       <h2 className="text-xl font-semibold">Schedule Viewing</h2>
       <p className="text-green-400 text-sm mt-1">₦4,000 per viewing</p>
@@ -91,12 +91,12 @@ export default function ScheduleViewingForm() {
         </div>
 
         {/* Fees Section */}
-        <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-700 text-sm flex justify-between">
+        <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-700 text-sm flex flex-col sm:flex-row justify-between">
           <div>
             <p>Viewing Fee</p>
             <p>Processing Fee</p>
           </div>
-          <div className="text-right">
+          <div className="text-right mt-2 sm:mt-0">
             <p>₦4,000</p>
             <p>₦0</p>
           </div>

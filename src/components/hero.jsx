@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PropertySections from "./propertySection";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const [propertyPurpose, setPropertyPurpose] = useState("Buy");
@@ -201,12 +202,14 @@ export default function Hero() {
             </div>
 
             {/* Submit Button */}
-            <button
+            <Link to="/searchResult">
+              <button
               type="submit"
               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
             >
               Search Property
             </button>
+            </Link>
           </form>
         </div>
       </section>
