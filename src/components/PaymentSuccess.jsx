@@ -1,5 +1,7 @@
 "use client";
 import { CheckCircle, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+// import Link from "next/link";
 
 export default function PaymentSuccess() {
   return (
@@ -39,12 +41,18 @@ export default function PaymentSuccess() {
           <button className="w-full py-3 rounded-lg border border-gray-700 text-white hover:bg-gray-800 transition">
             Continue as Guest
           </button>
-          <button className="w-full py-3 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-black font-semibold">
+          <Link
+            to="/signup"
+            className="w-full block text-center py-3 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-black font-semibold"
+          >
             Create an Account
-          </button>
-          <button className="w-full py-3 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition">
+          </Link>
+          <Link
+            to="/login"
+            className="w-full block text-center py-3 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+          >
             Log In
-          </button>
+          </Link>
         </div>
 
         {/* Why Create Account */}
