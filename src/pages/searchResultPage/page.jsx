@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FilterBar from "../../components/filterbar";
 import PropertyCard from "../../components/propertyCard";
 import Pagination from "../../components/pagination";
@@ -130,6 +131,7 @@ const ITEMS_PER_PAGE = 6;
 const INSPECTION_FEE = 4000;
 
 const ListingPage = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProperties, setSelectedProperties] = useState([]);
 
@@ -200,10 +202,7 @@ const ListingPage = () => {
             </div>
             <button
               className="bg-[#00FF94] text-black px-6 py-2 rounded-lg hover:bg-green-700"
-              onClick={() => {
-                // Implement checkout logic here
-                console.log("Proceeding to checkout with:", selectedProperties);
-              }}
+              onClick={() => navigate("/vi")}
             >
               Proceed to Checkout
             </button>
@@ -215,3 +214,4 @@ const ListingPage = () => {
 };
 
 export default ListingPage;
+// export default ListingPage;

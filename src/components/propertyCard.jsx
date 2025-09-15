@@ -1,6 +1,9 @@
 // components/RealEstateCard.jsx
 import { Video, Calendar, MapPin, Bed, Bath } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./Modal";
+import CustomVideoPlayer from "./videoPlayer";
 
 const PropertyCard = ({
   image,
@@ -11,6 +14,8 @@ const PropertyCard = ({
   onSelect,
   isSelected,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div
       className={`bg-[#333333] shadow-md rounded-lg overflow-hidden w-full ${
@@ -52,13 +57,28 @@ const PropertyCard = ({
             <Calendar size={14} />
             {isSelected ? "Remove Booking" : "Book Inspection - ₦4,000"}
           </button>
-          <Link
-            to="/vi"
+
+          <button
+            onClick={() => setShowModal(true)}
             className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 text-xs sm:text-sm rounded hover:bg-gray-100 w-full sm:w-auto"
           >
             <Video size={14} />
             Virtual Tour
-          </Link>
+          </button>
+
+          <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+            <div className="aspect-video">
+              <CustomVideoPlayer />
+            </div>
+            <div className="mt-4 text-center">
+              <Link
+                to="/vi"
+                className="inline-block bg-[#00FF94] text-black px-6 py-2 rounded-lg hover:bg-green-700"
+              >
+                View Full Virtual Tour
+              </Link>
+            </div>
+          </Modal>
         </div>
       </div>
     </div>
