@@ -127,18 +127,31 @@ const listings = [
 ];
 
 const ITEMS_PER_PAGE = 6;
+const INSPECTION_FEE = 4000;
 
 const ListingPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProperties, setSelectedProperties] = useState([]);
 
   const totalPages = Math.ceil(listings.length / ITEMS_PER_PAGE);
-
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentListings = listings.slice(startIndex, endIndex);
 
+  const totalAmount = selectedProperties.length * INSPECTION_FEE;
+
+  const handlePropertySelect = (property) => {
+    setSelectedProperties((prev) => {
+      const isSelected = prev.some((p) => p.title === property.title);
+      if (isSelected) {
+        return prev.filter((p) => p.title !== property.title);
+      }
+      return [...prev, property];
+    });
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 text-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 text-white relative">
       <div className="space-y-4 sm:space-y-6">
         <h2 className="text-xl sm:text-2xl font-bold">
           {listings.length} Properties Found
@@ -154,7 +167,14 @@ const ListingPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {currentListings.map((listing, index) => (
-            <PropertyCard key={index} {...listing} />
+            <PropertyCard
+              key={index}
+              {...listing}
+              onSelect={() => handlePropertySelect(listing)}
+              isSelected={selectedProperties.some(
+                (p) => p.title === listing.title
+              )}
+            />
           ))}
         </div>
 
@@ -166,6 +186,30 @@ const ListingPage = () => {
           />
         </div>
       </div>
+
+      {selectedProperties.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#1A1A1A] p-4 shadow-lg border-t border-gray-700">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+              <p className="text-sm">
+                Selected Properties: {selectedProperties.length}
+              </p>
+              <p className="text-lg font-bold">
+                Total: ₦{totalAmount.toLocaleString()}
+              </p>
+            </div>
+            <button
+              className="bg-[#00FF94] text-black px-6 py-2 rounded-lg hover:bg-green-700"
+              onClick={() => {
+                // Implement checkout logic here
+                console.log("Proceeding to checkout with:", selectedProperties);
+              }}
+            >
+              Proceed to Checkout
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -2,9 +2,21 @@
 import { Video, Calendar, MapPin, Bed, Bath } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const PropertyCard = ({ image, title, location, price, size }) => {
+const PropertyCard = ({
+  image,
+  title,
+  location,
+  price,
+  size,
+  onSelect,
+  isSelected,
+}) => {
   return (
-    <div className="bg-[#333333] shadow-md rounded-lg overflow-hidden w-full">
+    <div
+      className={`bg-[#333333] shadow-md rounded-lg overflow-hidden w-full ${
+        isSelected ? "ring-2 ring-[#00FF94]" : ""
+      }`}
+    >
       <img
         src={image}
         alt={title}
@@ -29,12 +41,21 @@ const PropertyCard = ({ image, title, location, price, size }) => {
           <span className="text-[#00E676]">₦{price.toLocaleString()}</span>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-4">
-          <button className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 bg-[#00FF94] text-black text-xs sm:text-sm rounded hover:bg-green-700 w-full sm:w-auto">
+          <button
+            className={`flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 ${
+              isSelected
+                ? "bg-gray-700 text-white"
+                : "bg-[#00FF94] text-black hover:bg-green-700"
+            } text-xs sm:text-sm rounded w-full sm:w-auto`}
+            onClick={onSelect}
+          >
             <Calendar size={14} />
-            Book Inspection - ₦4,000
+            {isSelected ? "Remove Booking" : "Book Inspection - ₦4,000"}
           </button>
-          {/* <Link to="/" className="hover:text-white"> */}
-          <Link to="/vi" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 text-xs sm:text-sm rounded hover:bg-gray-100 w-full sm:w-auto">
+          <Link
+            to="/vi"
+            className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 text-xs sm:text-sm rounded hover:bg-gray-100 w-full sm:w-auto"
+          >
             <Video size={14} />
             Virtual Tour
           </Link>
