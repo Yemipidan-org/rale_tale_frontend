@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
@@ -11,29 +8,39 @@ import Login from "./pages/Auth/login";
 import Register from "./pages/Auth/signup";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public pages */}
+        {/* Public pages with MainLayout */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/searchResult" element={<ListingPage />} />
           <Route path="/vi" element={<VirtualInspection />} />
         </Route>
 
+        {/* Auth pages (no layout wrapper) */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
 
-        <Route element={<DashboardLayout />}>
+        {/* Protected Dashboard routes */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/dashboard" element={<Dashboard />} />
           {/* later you can add more */}
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
         </Route>
+
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
