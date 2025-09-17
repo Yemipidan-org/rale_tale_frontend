@@ -14,17 +14,16 @@ import {
 export default function Hero() {
   const [propertyPurpose, setPropertyPurpose] = useState("Buy");
   const [formData, setFormData] = useState({});
-  const [propertyType, setPropertyType] = useState("");
   const [additionalFields, setAdditionalFields] = useState([]);
   const [selectedPurpose, setSelectedPurpose] = useState("");
 
   useEffect(() => {
-    if (propertyType) {
-      setAdditionalFields(getAdditionalFields(propertyType));
+    if (formData["Property Type"]) {
+      setAdditionalFields(getAdditionalFields(formData["Property Type"]));
     } else {
       setAdditionalFields([]);
     }
-  }, [propertyType]);
+  }, [formData["Property Type"]]);
 
   const handleInputChange = (fieldLabel, value) => {
     setFormData((prev) => ({
@@ -51,8 +50,8 @@ export default function Hero() {
 
         {/* Form Box */}
         <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full max-w-5xl mt-6">
-          {/* Toggle Buttons */}
-          <div className="flex flex-wrap gap-3 mb-6">
+         
+          {/* <div className="flex flex-wrap gap-3 mb-6">
             {["Buy", "Rent", "Lease"].map((option) => (
               <button
                 key={option}
@@ -66,7 +65,7 @@ export default function Hero() {
                 {option}
               </button>
             ))}
-          </div>
+          </div> */}
 
           <form className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -81,6 +80,9 @@ export default function Hero() {
                           handlePurposeChange(e.target.value);
                         }
                         handleInputChange(field.label, e.target.value);
+                        if (field.label === "Property Type") {
+                          setPropertyType(e.target.value);
+                        }
                       }}
                     >
                       <option value="">{field.label}</option>
@@ -111,19 +113,6 @@ export default function Hero() {
                   )}
                 </div>
               ))}
-
-              <select
-                value={propertyType}
-                onChange={(e) => setPropertyType(e.target.value)}
-                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
-              >
-                <option value="">Select Property Type</option>
-                {propertyTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
 
               {additionalFields.map((field, index) => (
                 <div key={index}>
@@ -326,6 +315,19 @@ export default function Hero() {
 //             {/* Submit Button */}
 //             <Link to="/searchResult">
 //               <button
+//               type="submit"
+//               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+//             >
+//               Search Property
+//             </button>
+//             </Link>
+//           </form>
+//         </div>
+//       </section>
+//       <PropertySections />
+//     </>
+//   );
+// }
 //               type="submit"
 //               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
 //             >
