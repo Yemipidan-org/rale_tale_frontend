@@ -1,141 +1,42 @@
 "use client";
 
-import { useState } from "react";
-import PropertySections from "./propertySection";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PropertySections from "./propertySection";
+import {
+  fieldConfig,
+  requesterFields,
+  propertyTypes,
+  getAdditionalFields,
+  getPropertyTypesByPurpose,
+} from "./formConfig";
 
 export default function Hero() {
   const [propertyPurpose, setPropertyPurpose] = useState("Buy");
+  const [formData, setFormData] = useState({});
+  const [propertyType, setPropertyType] = useState("");
+  const [additionalFields, setAdditionalFields] = useState([]);
+  const [selectedPurpose, setSelectedPurpose] = useState("");
 
-  // Form state
-  const [needPropertyFor, setNeedPropertyFor] = useState("I need Property");
-  const [localGovernmentArea, setLocalGovernmentArea] = useState("");
-  const [state, setState] = useState("");
-  const [neighbourhood, setNeighbourhood] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [inspectionDate, setInspectionDate] = useState("");
-  const [timeFrom, setTimeFrom] = useState("");
-  const [timeTo, setTimeTo] = useState("");
-  const [requesterName, setRequesterName] = useState("");
-  const [requesterEmail, setRequesterEmail] = useState("");
-  const [requesterCallLine, setRequesterCallLine] = useState("");
-  const [requesterWhatsapp, setRequesterWhatsapp] = useState("");
-  const [preferredFeedback, setPreferredFeedback] = useState("");
+  useEffect(() => {
+    if (propertyType) {
+      setAdditionalFields(getAdditionalFields(propertyType));
+    } else {
+      setAdditionalFields([]);
+    }
+  }, [propertyType]);
 
-  // Dynamic field mapping
-  const fieldConfig = {
-    Buy: [
-      { label: "State", value: state, setter: setState, type: "text" },
-      {
-        label: "Local Government Area",
-        value: localGovernmentArea,
-        setter: setLocalGovernmentArea,
-        type: "text",
-      },
-      {
-        label: "Neighbourhood",
-        value: neighbourhood,
-        setter: setNeighbourhood,
-        type: "text",
-      },
-      {
-        label: "Min Price",
-        value: minPrice,
-        setter: setMinPrice,
-        type: "number",
-      },
-      {
-        label: "Max Price",
-        value: maxPrice,
-        setter: setMaxPrice,
-        type: "number",
-      },
-    ],
-    Rent: [
-      { label: "State", value: state, setter: setState, type: "text" },
-      {
-        label: "Neighbourhood",
-        value: neighbourhood,
-        setter: setNeighbourhood,
-        type: "text",
-      },
-      {
-        label: "Min Price",
-        value: minPrice,
-        setter: setMinPrice,
-        type: "number",
-      },
-      {
-        label: "Max Price",
-        value: maxPrice,
-        setter: setMaxPrice,
-        type: "number",
-      },
-      {
-        label: "Inspection Date",
-        value: inspectionDate,
-        setter: setInspectionDate,
-        type: "date",
-      },
-      {
-        label: "Time From",
-        value: timeFrom,
-        setter: setTimeFrom,
-        type: "time",
-      },
-      { label: "Time To", value: timeTo, setter: setTimeTo, type: "time" },
-    ],
-    Lease: [
-      { label: "State", value: state, setter: setState, type: "text" },
-      {
-        label: "Local Government Area",
-        value: localGovernmentArea,
-        setter: setLocalGovernmentArea,
-        type: "text",
-      },
-      {
-        label: "Neighbourhood",
-        value: neighbourhood,
-        setter: setNeighbourhood,
-        type: "text",
-      },
-      {
-        label: "Preferred Feedback",
-        value: preferredFeedback,
-        setter: setPreferredFeedback,
-        type: "text",
-      },
-    ],
+  const handleInputChange = (fieldLabel, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldLabel]: value,
+    }));
   };
 
-  // Common requester info fields
-  const requesterFields = [
-    {
-      label: "Full Name",
-      value: requesterName,
-      setter: setRequesterName,
-      type: "text",
-    },
-    {
-      label: "Email",
-      value: requesterEmail,
-      setter: setRequesterEmail,
-      type: "email",
-    },
-    {
-      label: "Call Line",
-      value: requesterCallLine,
-      setter: setRequesterCallLine,
-      type: "tel",
-    },
-    {
-      label: "WhatsApp",
-      value: requesterWhatsapp,
-      setter: setRequesterWhatsapp,
-      type: "tel",
-    },
-  ];
+  const handlePurposeChange = (purpose) => {
+    setSelectedPurpose(purpose);
+    handleInputChange("Property Type", ""); // Reset property type when purpose changes
+  };
 
   return (
     <>
@@ -167,48 +68,188 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* Dynamic Fields */}
           <form className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {fieldConfig[propertyPurpose].map((field, index) => (
                 <div key={index}>
-                  {/* <label className="block text-sm mb-1 text-">{field.label}</label> */}
-                  <input
-                    type={field.type}
-                    value={field.value}
-                    onChange={(e) => field.setter(e.target.value)}
-                    className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
-                    placeholder={field.label}
-                  />
+                  {field.type === "select" ? (
+                    <select
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+                      value={formData[field.label] || ""}
+                      onChange={(e) => {
+                        if (field.label === "Property Purpose") {
+                          handlePurposeChange(e.target.value);
+                        }
+                        handleInputChange(field.label, e.target.value);
+                      }}
+                    >
+                      <option value="">{field.label}</option>
+                      {field.label === "Property Type"
+                        ? getPropertyTypesByPurpose(selectedPurpose).map(
+                            (opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            )
+                          )
+                        : field.options?.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type}
+                      value={formData[field.label] || ""}
+                      onChange={(e) =>
+                        handleInputChange(field.label, e.target.value)
+                      }
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                      placeholder={field.label}
+                    />
+                  )}
                 </div>
               ))}
+
+              <select
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
+                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+              >
+                <option value="">Select Property Type</option>
+                {propertyTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+
+              {additionalFields.map((field, index) => (
+                <div key={index}>
+                  {field.type === "select" ? (
+                    <select
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+                      value={formData[field.label] || ""}
+                      onChange={(e) =>
+                        handleInputChange(field.label, e.target.value)
+                      }
+                    >
+                      <option value="">{field.label}</option>
+                      {field.options?.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type}
+                      min={field.min}
+                      placeholder={field.label}
+                      value={formData[field.label] || ""}
+                      onChange={(e) =>
+                        handleInputChange(field.label, e.target.value)
+                      }
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <input
+              type="text"
+              placeholder="Landmark"
+              value={formData["Landmark"] || ""}
+              onChange={(e) => handleInputChange("Landmark", e.target.value)}
+              className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+            />
+
+            <div className="flex gap-2">
+              <input
+                type="number"
+                placeholder="Budget From"
+                value={formData["Budget From"] || ""}
+                onChange={(e) =>
+                  handleInputChange("Budget From", e.target.value)
+                }
+                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+              />
+              <input
+                type="number"
+                placeholder="Budget To"
+                value={formData["Budget To"] || ""}
+                onChange={(e) => handleInputChange("Budget To", e.target.value)}
+                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+              />
+            </div>
+
+            <div className="flex gap-2">
+              <input
+                type="date"
+                placeholder="Inspection Date"
+                value={formData["Inspection Date"] || ""}
+                onChange={(e) =>
+                  handleInputChange("Inspection Date", e.target.value)
+                }
+                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+              />
+              <input
+                type="time"
+                placeholder="Inspection Time"
+                value={formData["Inspection Time"] || ""}
+                onChange={(e) =>
+                  handleInputChange("Inspection Time", e.target.value)
+                }
+                className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+              />
             </div>
 
             {/* Requester Info */}
-            <h3 className="text-md font-semibold mt-6 mb-2">Requester Info</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <h3 className="text-md font-semibold mt-6 mb-2 text-white">
+              Requester Info
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {requesterFields.map((field, index) => (
                 <div key={index}>
-                  {/* <label className="block text-sm mb-1">{field.label}</label> */}
-                  <input
-                    type={field.type}
-                    value={field.value}
-                    onChange={(e) => field.setter(e.target.value)}
-                    className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
-                    placeholder={field.label}
-                  />
+                  {field.type === "select" ? (
+                    <select
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+                      value={formData[field.label] || ""}
+                      onChange={(e) =>
+                        handleInputChange(field.label, e.target.value)
+                      }
+                    >
+                      <option value="">{field.label}</option>
+                      {field.options?.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type}
+                      placeholder={field.label}
+                      value={formData[field.label] || ""}
+                      onChange={(e) =>
+                        handleInputChange(field.label, e.target.value)
+                      }
+                      className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                    />
+                  )}
                 </div>
               ))}
             </div>
 
-            {/* Submit Button */}
             <Link to="/searchResult">
               <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
-            >
-              Search Property
-            </button>
+                type="submit"
+                className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+              >
+                Search Property
+              </button>
             </Link>
           </form>
         </div>
@@ -217,3 +258,84 @@ export default function Hero() {
     </>
   );
 }
+
+//   return (
+//     <>
+//       <section className="flex flex-col items-center justify-center min-h-screen bg-[#0A0A0A] px-4 sm:px-6 lg:px-8">
+//         {/* Title */}
+//         <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white font-bold mt-12 text-center leading-tight">
+//           Find Your Perfect Property Match
+//         </h1>
+//         <p className="my-4 text-base sm:text-lg text-[#9CA3AF] text-center max-w-2xl">
+//           Connecting property owners, buyers, and real estate professionals
+//         </p>
+
+//         {/* Form Box */}
+//         <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full max-w-5xl mt-6">
+//           {/* Toggle Buttons */}
+//           <div className="flex flex-wrap gap-3 mb-6">
+//             {["Buy", "Rent", "Lease"].map((option) => (
+//               <button
+//                 key={option}
+//                 onClick={() => setPropertyPurpose(option)}
+//                 className={`px-4 py-2 rounded-md font-medium transition ${
+//                   propertyPurpose === option
+//                     ? "bg-green-500 text-black"
+//                     : "bg-[#FFFFFF1A] text-white hover:bg-green-600"
+//                 }`}
+//               >
+//                 {option}
+//               </button>
+//             ))}
+//           </div>
+
+//           {/* Dynamic Fields */}
+//           <form className="space-y-6">
+//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+//               {fieldConfig[propertyPurpose].map((field, index) => (
+//                 <div key={index}>
+//                   {/* <label className="block text-sm mb-1 text-">{field.label}</label> */}
+//                   <input
+//                     type={field.type}
+//                     value={field.value}
+//                     onChange={(e) => field.setter(e.target.value)}
+//                     className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+//                     placeholder={field.label}
+//                   />
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Requester Info */}
+//             <h3 className="text-md font-semibold mt-6 mb-2">Requester Info</h3>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+//               {requesterFields.map((field, index) => (
+//                 <div key={index}>
+//                   {/* <label className="block text-sm mb-1">{field.label}</label> */}
+//                   <input
+//                     type={field.type}
+//                     value={field.value}
+//                     onChange={(e) => field.setter(e.target.value)}
+//                     className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+//                     placeholder={field.label}
+//                   />
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Submit Button */}
+//             <Link to="/searchResult">
+//               <button
+//               type="submit"
+//               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+//             >
+//               Search Property
+//             </button>
+//             </Link>
+//           </form>
+//         </div>
+//       </section>
+//       <PropertySections />
+//     </>
+//   );
+// }
