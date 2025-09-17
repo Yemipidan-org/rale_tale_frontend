@@ -1,8 +1,8 @@
 "use client";
 import { Mail, Lock } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/authService";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -10,21 +10,52 @@ export default function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", formData);
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const data = await loginUser(formData);
+
+      // Save access token in localStorage
+      localStorage.setItem("accessToken", data.access);
+
+      setSuccess("Login successful! Redirecting...");
+      console.log("Login Response:", data);
+
+      // Redirect to dashboard or profile
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } catch (err) {
+      setError(
+        err.response?.data?.detail ||
+          Object.values(err.response?.data || {}).flat().join(" ") ||
+          "Login failed"
+      );
+      console.error(err.response?.data || err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#161616] flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-gray-900 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">
-          Login
-        </h2>
+        <h2 className="text-2xl font-bold text-white mb-6 text-center">Login</h2>
+
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {success && <p className="text-green-500 text-sm mb-2">{success}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email */}
@@ -58,14 +89,15 @@ export default function Login() {
           {/* Submit */}
           <button
             type="submit"
+            disabled={loading}
             className="w-full py-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg font-semibold text-black"
           >
-            Log In
+            {loading ? "Logging In..." : "Log In"}
           </button>
         </form>
 
         <div className="text-center mt-4 text-sm text-gray-400">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link to="/signup" className="text-green-400 font-medium">
             Sign up
           </Link>
