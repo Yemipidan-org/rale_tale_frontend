@@ -43,9 +43,6 @@ export const fieldConfig = {
     { label: "Property Type", type: "select", options: [] },
     { label: "State", type: "text" },
     { label: "Local Government Area", type: "text" },
-    { label: "Neighbourhood", type: "text" },
-    { label: "Min Price", type: "number" },
-    { label: "Max Price", type: "number" },
     { label: "Landmark", type: "text" },
     { label: "Budget From", type: "number" },
     { label: "Budget To", type: "number" },
@@ -59,11 +56,11 @@ export const fieldConfig = {
       options: ["Buy", "Sell", "Lease"],
     },
     { label: "Property Purpose", type: "select", options: propertyPurposes },
-    { label: "Property Type", type: "select", options: propertyTypes },
+    { label: "Property Type", type: "select", options: [] },
     { label: "State", type: "text" },
-    { label: "Neighbourhood", type: "text" },
-    { label: "Min Price", type: "number" },
-    { label: "Max Price", type: "number" },
+    { label: "Landmark", type: "text" },
+    { label: "Budget From", type: "number" },
+    { label: "Budget To", type: "number" },
     { label: "Inspection Date", type: "date" },
     { label: "Time From", type: "time" },
     { label: "Time To", type: "time" },
@@ -75,10 +72,10 @@ export const fieldConfig = {
       options: ["Buy", "Sell", "Lease"],
     },
     { label: "Property Purpose", type: "select", options: propertyPurposes },
-    { label: "Property Type", type: "select", options: propertyTypes },
+    { label: "Property Type", type: "select", options: [] },
     { label: "State", type: "text" },
     { label: "Local Government Area", type: "text" },
-    { label: "Neighbourhood", type: "text" },
+    { label: "Landmark", type: "text" },
     { label: "Preferred Feedback", type: "text" },
   ],
 };
@@ -128,3 +125,6 @@ export const getAdditionalFields = (propertyType) => {
 export const getPropertyTypesByPurpose = (purpose) => {
   return propertyTypesByPurpose[purpose] || [];
 };
+// export const getPropertyTypesByPurpose = (purpose) => {
+//   return propertyTypesByPurpose[purpose] || [];
+// };
