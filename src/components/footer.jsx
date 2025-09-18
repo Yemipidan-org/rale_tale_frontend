@@ -49,10 +49,12 @@ const Footer = () => {
         {/* Contact Info */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-          <p className="text-sm text-gray-300">1234 Property Lane</p>
-          <p className="text-sm text-gray-300">Real Estate City, RE 12345</p>
-          <p className="text-sm text-gray-300 mt-2">Phone: +1 (555) 123-4567</p>
-          <p className="text-sm text-gray-300">Email: info@estatex.com</p>
+          <p className="text-sm text-gray-300">
+            45 Adom Plaza, Ajibode Junction along UI-Ojoo Road, Ibadan.
+          </p>
+          {/* <p className="text-sm text-gray-300">Real Estate City, RE 12345</p> */}
+          <p className="text-sm text-gray-300 mt-2">Phone: 0702 630 7268</p>
+          <p className="text-sm text-gray-300">Email: info@raletale.ng</p>
         </div>
 
         {/* Newsletter */}

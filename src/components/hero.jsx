@@ -42,7 +42,7 @@ export default function Hero() {
       <section className="flex flex-col items-center justify-center min-h-screen bg-[#0A0A0A] px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white font-bold mt-12 text-center leading-tight">
-          Find Your Perfect Property Match
+          Find Your Perfect Property Within Minutes
         </h1>
         <p className="my-4 text-base sm:text-lg text-[#9CA3AF] text-center max-w-2xl">
           Connecting property owners, buyers, and real estate professionals
@@ -50,7 +50,6 @@ export default function Hero() {
 
         {/* Form Box */}
         <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full max-w-5xl mt-6">
-         
           {/* <div className="flex flex-wrap gap-3 mb-6">
             {["Buy", "Rent", "Lease"].map((option) => (
               <button
