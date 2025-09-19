@@ -97,7 +97,7 @@ export default function Hero() {
           {/* Two Column Layout */}
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Form Column */}
-            <div className="flex- w-[70%]">
+            <div className="flex- lg:w-[70%]">
               <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full">
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
@@ -122,16 +122,19 @@ export default function Hero() {
                             ))}
                           </select>
                         ) : (
-                          <input
-                            type={field.type}
-                            min={field.min}
-                            placeholder={field.label}
-                            value={formData[field.label] || ""}
-                            onChange={(e) =>
-                              handleInputChange(field.label, e.target.value)
-                            }
-                            className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
-                          />
+                            <>
+                            
+                            <input
+                              type={field.type}
+                              min={field.min}
+                              placeholder={field.label}
+                              value={formData[field.label] || ""}
+                              onChange={(e) =>
+                                handleInputChange(field.label, e.target.value)
+                              }
+                              className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                            />
+                          </>
                         )}
                       </div>
                     ))}
@@ -187,7 +190,7 @@ export default function Hero() {
             </div>
 
             {/* Image Column */}
-            <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden w-[40%]">
+            <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden lg:w-[40%]">
               <div className="relativ h-full min-h-[300px lg:min-h-[00px]">
                 <div className="absolut inset- bg-black/ flex items-cente justify-center">
                   <div className="text-center p-">
