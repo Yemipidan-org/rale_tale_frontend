@@ -26,6 +26,7 @@ export const propertyPurposes = ["Residential", "Commercial"];
 export const contactPreferences = [
   "Phone Call",
   "SMS",
+  "Phone Call and SMS",
   "Email",
   "WhatsApp",
   "All of the above",
@@ -34,7 +35,7 @@ export const contactPreferences = [
 export const fieldConfig = {
   Buy: [
     {
-      label: "Property Need",
+      label: "I need property to?",
       type: "select",
       options: ["Buy", "Sell", "Lease"],
     },

@@ -97,10 +97,10 @@ export default function Hero() {
           {/* Two Column Layout */}
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Form Column */}
-            <div className="flex-1">
+            <div className="flex- w-[70%]">
               <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full">
                 <form className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                     {fieldConfig[propertyPurpose].map((field) =>
                       getFieldValue(field)
                     )}
@@ -139,7 +139,7 @@ export default function Hero() {
 
                   {/* Requester Info */}
                   <h3 className="text-md font-semibold mt-6 mb-2 text-white">
-                    Requester Info
+                    How should we contact you?
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {requesterFields.map((field, index) => (
@@ -187,7 +187,7 @@ export default function Hero() {
             </div>
 
             {/* Image Column */}
-            <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden">
+            <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden w-[40%]">
               <div className="relativ h-full min-h-[300px lg:min-h-[00px]">
                 <div className="absolut inset- bg-black/ flex items-cente justify-center">
                   <div className="text-center p-">
