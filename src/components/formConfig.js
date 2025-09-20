@@ -45,10 +45,20 @@ export const fieldConfig = {
     { label: "State", type: "text" },
     { label: "Local Government Area", type: "text" },
     { label: "Landmark", type: "text" },
-    { label: "Budget From (#)", type: "number" },
-    { label: "Budget To (#)", type: "number" },
-    { label: "Inspection Date", type: "date" },
-    { label: "Inspection Time", type: "time" },
+    {
+      section: "Budget",
+      fields: [
+        { label: "Budget From (₦)", type: "number" },
+        { label: "Budget To (₦)", type: "number" },
+      ],
+    },
+    {
+      section: "I am available for inspection on:",
+      fields: [
+        { label: "Inspection Date", type: "date" },
+        { label: "Inspection Time", type: "time" },
+      ],
+    },
   ],
   Rent: [
     {
