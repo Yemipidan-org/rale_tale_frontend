@@ -103,16 +103,31 @@ export const requesterFields = [
   },
 ];
 
+const bedroomOptions = ["1", "2", "3", "4", "5", "6", "Others"];
+const storyOptions = ["1-20", "21-40", "41-60", "61-80", "81-100", "100+"];
+
 export const getAdditionalFields = (propertyType) => {
   switch (propertyType) {
     case "Flat":
     case "Duplex":
     case "Bungalow":
-      return [{ label: "Number of Bedrooms", type: "number", min: 1 }];
+      return [
+        {
+          label: "Number of Bedrooms",
+          type: "select",
+          options: bedroomOptions,
+        },
+      ];
     case "Shopping Complex":
       return [{ label: "Number of Suites", type: "number", min: 1 }];
     case "Story Building":
-      return [{ label: "Number of Stories", type: "number", min: 1 }];
+      return [
+        {
+          label: "Number of Stories",
+          type: "select",
+          options: storyOptions,
+        },
+      ];
     case "Land":
       return [
         {

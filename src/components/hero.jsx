@@ -66,32 +66,70 @@ export default function Hero() {
     if (field.label === "Property Type" && !selectedPurpose) {
       return null;
     }
+
     return (
-      <div key={field.label}>
+      <div key={field.label} className="space-y-2">
         {field.type === "select" ? (
-          <select
-            className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
-            value={formData[field.label] || ""}
-            onChange={(e) => {
-              if (field.label === "Property Purpose") {
-                handlePurposeChange(e.target.value);
-              }
-              handleInputChange(field.label, e.target.value);
-            }}
-          >
-            <option value="">{field.label}</option>
-            {field.label === "Property Type"
-              ? getPropertyTypesByPurpose(selectedPurpose).map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))
-              : field.options?.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
+          <>
+            <select
+              className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+              value={formData[field.label] || ""}
+              onChange={(e) => {
+                if (field.label === "Property Purpose") {
+                  handlePurposeChange(e.target.value);
+                }
+                handleInputChange(field.label, e.target.value);
+              }}
+            >
+              <option value="">{field.label}</option>
+              {field.label === "Property Type"
+                ? getPropertyTypesByPurpose(selectedPurpose).map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))
+                : field.options?.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+            </select>
+            {field.label === "Property Type" && formData["Property Type"] && (
+              <div className="mt-2">
+                {additionalFields.map((addField, index) => (
+                  <div key={index}>
+                    {addField.type === "select" ? (
+                      <select
+                        className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
+                        value={formData[addField.label] || ""}
+                        onChange={(e) =>
+                          handleInputChange(addField.label, e.target.value)
+                        }
+                      >
+                        <option value="">{addField.label}</option>
+                        {addField.options?.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type={addField.type}
+                        min={addField.min}
+                        placeholder={addField.label}
+                        value={formData[addField.label] || ""}
+                        onChange={(e) =>
+                          handleInputChange(addField.label, e.target.value)
+                        }
+                        className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                      />
+                    )}
+                  </div>
                 ))}
-          </select>
+              </div>
+            )}
+          </>
         ) : (
           <input
             type={field.type}
