@@ -53,7 +53,11 @@ export default function Hero() {
                   onChange={(e) =>
                     handleInputChange(subField.label, e.target.value)
                   }
-                  className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                  className={`w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
+                    subField.type === "date" || subField.type === "time"
+                      ? "date-time"
+                      : ""
+                  }`}
                   placeholder={subField.label}
                 />
               </div>
@@ -135,7 +139,9 @@ export default function Hero() {
             type={field.type}
             value={formData[field.label] || ""}
             onChange={(e) => handleInputChange(field.label, e.target.value)}
-            className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+            className={`w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
+              field.type === "date" || field.type === "time" ? "date-time" : ""
+            }`}
             placeholder={field.label}
           />
         )}
@@ -145,6 +151,17 @@ export default function Hero() {
 
   return (
     <>
+    {/* date/time icon color adjustments (WebKit) and ensure white text */}
+    <style>{`
+      input.date-time {
+        color: white;
+      }
+      input[type="date"].date-time::-webkit-calendar-picker-indicator,
+      input[type="time"].date-time::-webkit-calendar-picker-indicator {
+        filter: invert(1) brightness(2);
+        opacity: 1;
+      }
+    `}</style>
       <section className="min-h-screen bg-[#0A0A0A] px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-7xl mx-auto">
           {/* Title */}
@@ -195,7 +212,11 @@ export default function Hero() {
                               onChange={(e) =>
                                 handleInputChange(field.label, e.target.value)
                               }
-                              className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                              className={`w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
+                                field.type === "date" || field.type === "time"
+                                  ? "date-time"
+                                  : ""
+                              }`}
                             />
                           </>
                         )}
