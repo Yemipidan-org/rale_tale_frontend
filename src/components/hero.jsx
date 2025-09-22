@@ -40,7 +40,7 @@ export default function Hero() {
   const getFieldValue = (field) => {
     if (field.section) {
       return (
-        <div key={field.section} className="col-span-2">
+        <div key={field.section} className="col-span-1 lg:col-span-2">
           <h3 className="text-md font-semibold mb-2 text-white">
             {field.section}
           </h3>
@@ -68,7 +68,7 @@ export default function Hero() {
     }
 
     return (
-      <div key={field.label} className="space-y-2">
+      <div key={field.label} className="col-span-1 space-y-2">
         {field.type === "select" ? (
           <>
             <select
@@ -160,16 +160,16 @@ export default function Hero() {
           {/* Two Column Layout */}
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Form Column */}
-            <div className="flex- lg:w-[70%]">
+            <div className="flex-1 ">
               <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full">
                 <form className="space-y-6">
                   {/* Main Form Fields */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {fieldConfig[propertyPurpose].map((field) =>
                       getFieldValue(field)
                     )}
                     {additionalFields.map((field, index) => (
-                      <div key={index}>
+                      <div key={index} className="col-span-1">
                         {field.type === "select" ? (
                           <select
                             className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
@@ -255,7 +255,7 @@ export default function Hero() {
             </div>
 
             {/* Image Column */}
-            <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden lg:w-[40%]">
+            {/* <div className="flex-1 bg-[#FFFFFF0D rounded-lg overflow-hidden lg:w-[40%]">
               <div className="relativ h-full min-h-[300px lg:min-h-[00px]">
                 <div className="absolut inset- bg-black/ flex items-cente justify-center">
                   <div className="text-center p-">
@@ -264,43 +264,11 @@ export default function Hero() {
                       alt="Logo"
                       className="w-full rounded"
                     />
-                    {/* <div className="border-2 border-dashed border-gray-500 rounded-lg p-8 flex flex-col items-center">
-                      <svg
-                        className="w-12 h-12 text-gray-400 mb-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                      </svg>
-                      <p className="text-gray-400 text-sm">
-                        Click to upload or drag and drop
-                      </p>
-                      <p className="text-gray-500 text-xs mt-2">
-                        SVG, PNG, JPG or GIF (max. 800x400px)
-                      </p>
-                      <input
-                        type="file"
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            // Handle image upload
-                            console.log("File selected:", file);
-                          }
-                        }}
-                      />
-                    </div> */}
+                    
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
