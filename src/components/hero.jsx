@@ -151,8 +151,8 @@ export default function Hero() {
 
   return (
     <>
-    {/* date/time icon color adjustments (WebKit) and ensure white text */}
-    <style>{`
+      {/* date/time icon color adjustments (WebKit) and ensure white text */}
+      <style>{`
       input.date-time {
         color: white;
       }
@@ -175,9 +175,9 @@ export default function Hero() {
           </div>
 
           {/* Two Column Layout */}
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row justify-center gap-8">
             {/* Form Column */}
-            <div className="flex-1 ">
+            <div className="flex-">
               <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full">
                 <form className="space-y-6">
                   {/* Main Form Fields */}
