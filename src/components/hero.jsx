@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropertySections from "./propertySection";
 import {
@@ -31,6 +31,34 @@ export default function Hero() {
       [fieldLabel]: value,
     }));
   };
+
+  // store array of selected options for multiselect fields
+  const handleCheckboxChange = (fieldLabel, option) => {
+    setFormData((prev) => {
+      const current = Array.isArray(prev[fieldLabel]) ? prev[fieldLabel] : [];
+      const exists = current.includes(option);
+      const next = exists
+        ? current.filter((i) => i !== option)
+        : [...current, option];
+      return { ...prev, [fieldLabel]: next };
+    });
+  };
+
+  // dropdown open state + click-outside handler for the multiselect
+  const [contactDropdownOpen, setContactDropdownOpen] = useState(false);
+  const contactDropdownRef = useRef(null);
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (
+        contactDropdownRef.current &&
+        !contactDropdownRef.current.contains(e.target)
+      ) {
+        setContactDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
 
   const handlePurposeChange = (purpose) => {
     setSelectedPurpose(purpose);
@@ -231,8 +259,82 @@ export default function Hero() {
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {requesterFields.map((field, index) => (
-                        <div key={index}>
-                          {field.type === "select" ? (
+                        <div
+                          key={index}
+                          className="relative"
+                          ref={
+                            field.label === "Preferred Contact Method"
+                              ? contactDropdownRef
+                              : null
+                          }
+                        >
+                          {field.type === "multiselect" ? (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => setContactDropdownOpen((s) => !s)}
+                                className="w-full text-left bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400 flex justify-between items-center"
+                              >
+                                <div className="inline-block max-w-[180px] overflow-hidden">
+                                  <span
+                                    className="block truncate whitespace-nowrap"
+                                    title={
+                                      formData[field.label]?.length > 0
+                                        ? formData[field.label].join(", ")
+                                        : field.label
+                                    }
+                                  >
+                                    {formData[field.label]?.length > 0
+                                      ? formData[field.label].join(", ")
+                                      : field.label}
+                                  </span>
+                                </div>
+                                <svg
+                                  className="w-4 h-4 text-gray-400 shrink-0 ml-2"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.064a.75.75 0 111.1 1.02l-4.25 4.66a.75.75 0 01-1.1 0l-4.25-4.66a.75.75 0 01.02-1.06z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                              {contactDropdownOpen && (
+                                <div className="absolute z-20 mt-1 w-full bg-[#0B0B0B] border border-[#2A2A2A] rounded-md p-3 shadow-lg">
+                                  <div className="flex flex-col gap-2 max-h-48 overflow-auto">
+                                    {field.options?.map((opt) => {
+                                      const checked = (
+                                        formData[field.label] || []
+                                      ).includes(opt);
+                                      return (
+                                        <label
+                                          key={opt}
+                                          className="inline-flex items-center text-sm"
+                                        >
+                                          <input
+                                            type="checkbox"
+                                            checked={checked}
+                                            onChange={() =>
+                                              handleCheckboxChange(
+                                                field.label,
+                                                opt
+                                              )
+                                            }
+                                            className="h-4 w-4 text-green-500 bg-[#1E1E1E] rounded"
+                                          />
+                                          <span className="ml-2 text-white">
+                                            {opt}
+                                          </span>
+                                        </label>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          ) : field.type === "select" ? (
                             <select
                               className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm text-gray-400"
                               value={formData[field.label] || ""}
@@ -467,6 +569,43 @@ export default function Hero() {
 //             </div>
 
 //             {/* Submit Button */}
+//             <Link to="/searchResult">
+//               <button
+//               type="submit"
+//               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+//             >
+//               Search Property
+//             </button>
+//             </Link>
+//           </form>
+//         </div>
+//       </section>
+//       <PropertySections />
+//     </>
+//   );
+// }
+//               type="submit"
+//               className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+//             >
+//               Search Property
+//             </button>
+//             </Link>
+//           </form>
+//         </div>
+//       </section>
+//       <PropertySections />
+//     </>
+//   );
+// }
+//             </button>
+//             </Link>
+//           </form>
+//         </div>
+//       </section>
+//       <PropertySections />
+//     </>
+//   );
+// }
 //             <Link to="/searchResult">
 //               <button
 //               type="submit"

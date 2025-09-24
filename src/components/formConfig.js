@@ -98,7 +98,7 @@ export const requesterFields = [
   { label: "WhatsApp Line", type: "tel" },
   {
     label: "Preferred Contact Method",
-    type: "select",
+    type: "multiselect", // render as a dropdown that contains checkboxes
     options: contactPreferences,
   },
 ];
