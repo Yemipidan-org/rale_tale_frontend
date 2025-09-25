@@ -151,6 +151,62 @@ export const getAdditionalFields = (propertyType) => {
 export const getPropertyTypesByPurpose = (purpose) => {
   return propertyTypesByPurpose[purpose] || [];
 };
-// export const getPropertyTypesByPurpose = (purpose) => {
-//   return propertyTypesByPurpose[purpose] || [];
-// };
+
+export const advancedFilterConfig = {
+  furnishing: ["Furnished", "Semi-Furnished", "Unfurnished"],
+  condition: ["New", "Renovated", "Needs Some Work"],
+  securityFeatures: [
+    "Gated Community",
+    "24/7 Security",
+    "CCTV",
+    "Street Lights",
+  ],
+  utilities: ["Stable Electricity", "Borehole", "Backup Power", "Estate Water"],
+  lifestyleAmenities: [
+    "Swimming Pool",
+    "Gym",
+    "Playgrounds",
+    "Green Areas",
+    "Clubhouse",
+  ],
+  accessibility: [
+    "Schools Nearby",
+    "Hospitals Nearby",
+    "Markets Nearby",
+    "Airport Nearby",
+    "Business District Nearby",
+  ],
+  communityServices: [
+    "Waste Disposal",
+    "Estate Management",
+    "Fire Service Access",
+  ],
+  trafficLevel: ["Low", "Medium", "High"],
+  noiseLevel: ["Quiet", "Medium", "Busy"],
+};
+
+export const smartFilterConfig = {
+  verificationStatus: [
+    { label: "Verified Listings Only", value: "verified" },
+    { label: "Exclusive Listings", value: "exclusive" },
+    { label: "Featured/Premium", value: "premium" },
+  ],
+  paymentOptions: [
+    { label: "Installment", value: "installment" },
+    { label: "Mortgage", value: "mortgage" },
+    { label: "Outright", value: "outright" },
+  ],
+  inspectionAvailability: [
+    { label: "Next 3 Days", value: "next3days" },
+    { label: "This Weekend", value: "weekend" },
+    { label: "Anytime", value: "anytime" },
+  ],
+};
+
+export const sortingOptions = [
+  { label: "Newest First", value: "newest" },
+  { label: "Price: Low to High", value: "price_asc" },
+  { label: "Price: High to Low", value: "price_desc" },
+  { label: "Most Viewed", value: "most_viewed" },
+  { label: "Closest to Me", value: "nearest" },
+];

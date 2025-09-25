@@ -159,13 +159,17 @@ const ListingPage = () => {
           {listings.length} Properties Found
         </h2>
 
-        <FilterBar />
-
-        <div className="flex justify-end">
+        <FilterBar
+          onFilterChange={(filters) => {
+            console.log("Selected Filters:", filters);
+            // later: apply filter logic to listings
+          }}
+        />
+        {/* <div className="flex justify-end">
           <select className="border px-2 py-1.5 sm:px-3 sm:py-2 rounded text-sm sm:text-base">
             <option>Sort Newest First</option>
           </select>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {currentListings.map((listing, index) => (
