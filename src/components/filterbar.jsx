@@ -141,12 +141,12 @@ const FilterBar = ({ onFilterChange, onSortChange }) => {
         </select>
       </div>
 
-      {/* Filters Panel */}
+      {/* Filters Panel - Updated for left positioning */}
       <div
         className={`
-        fixed inset-y-0 right-0 z-40 w-80 bg-[#1A1A1A]/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
-        border-l border-gray-700/50 shadow-xl
-        ${isFilterVisible ? "translate-x-0" : "translate-x-full"}
+        fixed inset-y-0 left-0 z-40 w-80 bg-[#1A1A1A]/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
+        border-r border-gray-700/50 shadow-xl
+        ${isFilterVisible ? "translate-x-0" : "-translate-x-full"}
         overflow-y-auto
       `}
       >
