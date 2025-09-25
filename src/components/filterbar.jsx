@@ -141,7 +141,7 @@ const FilterBar = ({ onFilterChange, onSortChange }) => {
         </select>
       </div>
 
-      {/* Filters Panel - Updated for left positionin */}
+      {/* Filters Panel - Updated for left positionind */}
       <div
         className={`
         fixed inset-y-0 left-0 z-40 w-80 bg-[#1A1A1A]/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
