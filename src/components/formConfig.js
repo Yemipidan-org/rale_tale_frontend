@@ -1,15 +1,41 @@
 export const propertyTypesByPurpose = {
-  Residential: ["Flat", "Duplex", "Bungalow", "Story Building", "Land"],
+  Residential: [
+    "Apartment / Flat",
+    "Duplex, Bungalow",
+    "Terrace House",
+    "Penthouse",
+    "Mansion",
+    "Villa",
+    "Studio Apartment",
+    "Self-Contain / Mini Flat",
+  ],
   Commercial: [
-    "Flat",
-    "Duplex",
-    "Shopping Complex",
-    "Bungalow",
-    "Story Building",
-    "Land",
+    "Office Space",
+    "Shop",
+    "Showroom",
+    "Hotel / Guest House",
+    "Event Centre",
+    "Restaurant / Bar",
+    "Mall / Plaza Unit",
+    "Co-working Space",
+  ],
+  Industrial: ["Warehouse", "Factory", "Workshop", "Industrial Land"],
+  Land: [
+    "Residential Land",
+    "Commercial Land",
+    "Industrial Land",
+    "Agricultural Land",
+    "Mixed-use Land",
+  ],
+  "Mixed/Other": [
+    "Block of Flats",
+    "Short-let Apartment",
+    "Hostel / Student Housing",
+    "Religious Building (Church, Mosque)",
     "Filling Station",
-    "Warehouse",
-    "Motel/Hotel/Guest House",
+    "School / Educational Facility",
+    "Hospital / Clinic",
+    "Farm / Agricultural Facility",
   ],
 };
 
@@ -18,10 +44,19 @@ export const propertyTypes = [
   ...new Set([
     ...propertyTypesByPurpose.Residential,
     ...propertyTypesByPurpose.Commercial,
+    ...propertyTypesByPurpose.Industrial,
+    ...propertyTypesByPurpose.Land,
+    ...propertyTypesByPurpose["Mixed/Other"],
   ]),
 ];
 
-export const propertyPurposes = ["Residential", "Commercial"];
+export const propertyPurposes = [
+  "Residential",
+  "Commercial",
+  "Industrial",
+  "Land",
+  "Mixed/Other",
+];
 
 export const contactPreferences = [
   "Phone Call",
