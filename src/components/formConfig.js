@@ -72,7 +72,7 @@ export const fieldConfig = {
     {
       label: "I need property to?",
       type: "select",
-      options: ["Buy", "Sell", "Lease"],
+      options: ["Buy", "Rent", "Short Let", "Lease", "Join Ventures"],
     },
     { label: "Property Purpose", type: "select", options: propertyPurposes },
     // We'll handle Property Type options dynamically in the component
