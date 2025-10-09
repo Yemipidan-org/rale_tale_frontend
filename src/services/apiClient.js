@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000/api", // change to production URL later
+  baseURL: "http://66.23.230.126/api", // change to production URL later
 });
 
 API.interceptors.request.use((config) => {

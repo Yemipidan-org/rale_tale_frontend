@@ -177,6 +177,11 @@ export default function Hero() {
     );
   };
 
+  const handleSeacrhProperty = (e) => {
+    e.preventDefault();
+    console.log("the form data", formData);
+  };
+
   return (
     <>
       {/* date/time icon color adjustments (WebKit) and ensure white text */}
@@ -367,14 +372,15 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  <Link to="/searchResult">
-                    <button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
-                    >
-                      Search Property
-                    </button>
-                  </Link>
+                  {/* <Link to="/searchResult"> */}
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
+                    onClick={handleSeacrhProperty}
+                  >
+                    Search Property
+                  </button>
+                  {/* </Link> */}
                 </form>
               </div>
             </div>
@@ -401,5 +407,3 @@ export default function Hero() {
     </>
   );
 }
-
- 

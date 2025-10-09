@@ -17,3 +17,9 @@ export const getProfile = async () => {
   const response = await API.get("/users/profile/");
   return response.data;
 };
+
+// Search Property
+export const searchProperty = async (credentials) => {
+  const response = await API.post("/property/search/", credentials);
+  return response.data;
+};
