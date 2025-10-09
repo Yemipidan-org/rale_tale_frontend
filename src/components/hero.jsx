@@ -10,6 +10,7 @@ import {
   getAdditionalFields,
   getPropertyTypesByPurpose,
 } from "./formConfig";
+import { searchProperty } from "../services/authService";
 
 export default function Hero() {
   const [propertyPurpose, setPropertyPurpose] = useState("Buy");
@@ -177,9 +178,20 @@ export default function Hero() {
     );
   };
 
-  const handleSeacrhProperty = (e) => {
+  // Seacrh Properties.
+  const handleSeacrhProperty =  async (e) => {
     e.preventDefault();
     console.log("the form data", formData);
+
+    try {
+      const data = await searchProperty(formData)
+
+
+    } catch (error) {
+       
+    } finally {
+      
+    }
   };
 
   return (
