@@ -82,7 +82,7 @@ export default function Hero() {
                   onChange={(e) =>
                     handleInputChange(subField.label, e.target.value)
                   }
-                  className={`w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
+                  className={`w-full text-white bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
                     subField.type === "date" || subField.type === "time"
                       ? "date-time"
                       : ""
@@ -155,7 +155,7 @@ export default function Hero() {
                         onChange={(e) =>
                           handleInputChange(addField.label, e.target.value)
                         }
-                        className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                        className="w-full text-white bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
                       />
                     )}
                   </div>
@@ -224,7 +224,7 @@ export default function Hero() {
             {/* Form Column */}
             <div className="flex-">
               <div className="bg-[#FFFFFF0D] p-6 sm:p-8 rounded-lg w-full">
-                <form className="space-y-6">
+                <form className="space-y-6 text-white">
                   {/* Main Form Fields */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {fieldConfig[propertyPurpose].map((field) =>
@@ -257,7 +257,7 @@ export default function Hero() {
                               onChange={(e) =>
                                 handleInputChange(field.label, e.target.value)
                               }
-                              className={`w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
+                              className={`w-full text-white bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400 ${
                                 field.type === "date" || field.type === "time"
                                   ? "date-time"
                                   : ""
@@ -376,7 +376,7 @@ export default function Hero() {
                               onChange={(e) =>
                                 handleInputChange(field.label, e.target.value)
                               }
-                              className="w-full bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
+                              className="w-full text-white bg-[#1E1E1E] px-3 py-2 rounded-md outline-none text-sm placeholder-gray-400"
                             />
                           )}
                         </div>
