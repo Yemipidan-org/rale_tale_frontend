@@ -1,5 +1,6 @@
 // pages/Dashboard/Dashboard.jsx
 import { User, Phone, Mail, MapPin, Heart, MessageSquare } from "lucide-react";
+import DashboardOverview from "../../components/DashboardOverview";
 
 export default function Dashboard() {
   return (
@@ -42,13 +43,13 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <button className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 gap-2">
           <User className="w-5 h-5" /> Search Properties
         </button>
-        <button className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-lg py-3 gap-2">
+        {/* <button className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-lg py-3 gap-2">
           <MapPin className="w-5 h-5" /> Book Inspection
-        </button>
+        </button> */}
         <button className="flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white rounded-lg py-3 gap-2">
           <Heart className="w-5 h-5" /> My Favorites
         </button>
@@ -56,6 +57,9 @@ export default function Dashboard() {
           <MessageSquare className="w-5 h-5" /> Contact Support
         </button>
       </div>
+
+      {/* Dashboard Overview */}
+      <DashboardOverview />
     </div>
   );
 }

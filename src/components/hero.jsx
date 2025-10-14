@@ -384,15 +384,15 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* <Link to="/searchResult"> */}
+                  <Link to="/searchResult">
                   <button
                     type="submit"
                     className="w-full bg-gradient-to-r from-green-500 to-blue-500 px-6 py-3 rounded-md font-medium mt-6 text-white hover:opacity-90 transition"
-                    onClick={handleSeacrhProperty}
+                    // onClick={handleSeacrhProperty}
                   >
                     Search Property
                   </button>
-                  {/* </Link> */}
+                  </Link>
                 </form>
               </div>
             </div>
