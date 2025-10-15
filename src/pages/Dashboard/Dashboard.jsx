@@ -1,10 +1,12 @@
 // pages/Dashboard/Dashboard.jsx
 import { User, Phone, Mail, MapPin, Heart, MessageSquare } from "lucide-react";
 import DashboardOverview from "../../components/DashboardOverview";
+import TransactionHistory from "../../components/TransactionHistory";
+import SupportSection from "../../components/SupportSection";
 
 export default function Dashboard() {
   return (
-    <div className="p-6 bg-black min-h-screen text-white">
+    <div className=" sm:px-6 lg:px-8 py-6 space-y-6 bg-black min-h-screen text-white">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Welcome back, John Smith!</h1>
@@ -60,6 +62,12 @@ export default function Dashboard() {
 
       {/* Dashboard Overview */}
       <DashboardOverview />
+
+      {/* Transaction History */}
+      <TransactionHistory />
+
+      {/* Support Section */}
+      <SupportSection />
     </div>
   );
 }
