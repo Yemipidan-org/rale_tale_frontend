@@ -9,6 +9,9 @@ import Register from "./pages/Auth/signup";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SuperAdminLayout from "./layouts/superAdminLayout";
+import DashboardSuperAdmin from "./pages/SuperAdmin/Dashboard";
+ 
 
 function App() {
   return (
@@ -34,6 +37,19 @@ function App() {
           }
         >
           <Route path="/dashboard" element={<Dashboard />} />
+          {/* later you can add more */}
+          {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
+          {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
+        </Route>
+
+        <Route
+          element={
+            // <ProtectedRoute>
+            <SuperAdminLayout />
+            // </ProtectedRoute>
+          }
+        >
+          <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
           {/* later you can add more */}
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
