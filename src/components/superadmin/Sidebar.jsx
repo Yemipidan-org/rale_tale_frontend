@@ -10,55 +10,64 @@ import {
   Settings,
   Wallet,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
+import DashboardContent from "../../pages/SuperAdmin/Dashboard";
+import UsersContent from "../../pages/SuperAdmin/Users";
+import PropertiesContent from "../../pages/SuperAdmin/Properties";
+import TransactionsContent from "../../pages/SuperAdmin/Transactions";
+import DocumentsContent from "../../pages/SuperAdmin/Documents";
+import NotificationsContent from "../../pages/SuperAdmin/Notifications";
+import ReportsContent from "../../pages/SuperAdmin/Reports";
+import SettingsContent from "../../pages/SuperAdmin/Settings";
 
-export default function SuperAdminSidebar() {
-  const [active, setActive] = useState("Dashboard");
-
+export default function SuperAdminSidebar({ onMenuSelect, activeMenu }) {
   const menuItems = [
-    { name: "Dashboard", icon: <Home size={18} />, link: "/superadmin" },
+    {
+      name: "Dashboard",
+      icon: <Home size={18} />,
+      component: <DashboardContent />,
+    },
     {
       name: "Users Management",
       icon: <Users size={18} />,
-      link: "/superadmin/users",
+      component: <UsersContent />,
     },
     {
       name: "Property Management",
       icon: <Building2 size={18} />,
-      link: "/superadmin/properties",
+      component: <PropertiesContent />,
     },
     {
       name: "Transactions",
       icon: <Wallet size={18} />,
-      link: "/superadmin/transactions",
+      component: <TransactionsContent />,
     },
     {
       name: "Legal Documents",
       icon: <FileText size={18} />,
-      link: "/superadmin/documents",
+      component: <DocumentsContent />,
     },
     {
       name: "Notifications",
       icon: <Bell size={18} />,
-      link: "/superadmin/notifications",
+      component: <NotificationsContent />,
     },
     {
       name: "Reports",
       icon: <BarChart2 size={18} />,
-      link: "/superadmin/reports",
+      component: <ReportsContent />,
     },
     {
       name: "Settings",
       icon: <Settings size={18} />,
-      link: "/superadmin/settings",
+      component: <SettingsContent />,
     },
   ];
 
   return (
-    <aside className="bg-[#0f0f0f] text-gray-300 w-64 min-h-screen border-r border-[#1f1f1f] hidden md:flex flex-col">
+    <aside className="bg-[#0f0f0f] text-gray-300 w-64 min-h-screen border-r border-[#1f1f1f] fixed left-0 top-0  ">
       {/* Logo Section */}
-      {/* <div className="flex items-center space-x-2 px-6 py-4 border-b border-[#1f1f1f]">
+      <div className="flex items-center space-x-2 px-6 py-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="#3B82F6"
@@ -68,24 +77,23 @@ export default function SuperAdminSidebar() {
           <path d="M12 3l9 7-1.5 1.3L12 5.4 4.5 11.3 3 10l9-7zM4 12h16v8H4v-8zm2 2v4h12v-4H6z" />
         </svg>
         <h1 className="text-lg font-semibold text-white">Raletale</h1>
-      </div> */}
+      </div>
 
       {/* Menu Items */}
       <nav className="flex-1 mt-4">
         {menuItems.map((item) => (
-          <Link
+          <button
             key={item.name}
-            href={item.link}
-            onClick={() => setActive(item.name)}
-            className={`flex items-center space-x-3 px-6 py-3 text-sm font-medium transition ${
-              active === item.name
+            onClick={() => onMenuSelect(item.component)}
+            className={`flex items-center w-full space-x-3 px-6 py-3 text-sm font-medium transition ${
+              activeMenu === item.name
                 ? "bg-blue-600 text-white"
                 : "hover:bg-[#1c1c1c] text-gray-400"
             }`}
           >
             <span>{item.icon}</span>
             <span>{item.name}</span>
-          </Link>
+          </button>
         ))}
       </nav>
     </aside>

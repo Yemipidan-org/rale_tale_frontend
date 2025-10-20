@@ -1,8 +1,10 @@
-export default function DashboardSuperAdmin() {
+export default function DashboardContent() {
   return (
-    <div>
-      <h1>Super Admin Dashboard</h1>
-      {/* Add your super admin dashboard components here */}
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+      <div className="bg-[#1A1A1A] rounded-lg p-4">
+        {/* Add dashboard content here */}
+      </div>
     </div>
   );
 }
