@@ -19,7 +19,9 @@ export default function SuperAdminLayout() {
       <SuperAdminTopNav />
       <div className="flex">
         <SuperAdminSidebar
-          onMenuSelect={handleMenuSelect}
+          onMenuSelect={(component, menuName) =>
+            handleMenuSelect(component, menuName)
+          }
           activeMenu={activeMenu}
         />
         <main className="flex-1 p-6 ml-64">{currentComponent}</main>

@@ -1,10 +1,13 @@
+import Analytics from "../../components/superadmin/Analytics";
+import DashboardOverview from "../../components/superadmin/DashboardOverview";
+import RecentTransactions from "../../components/superadmin/RecentTransactions";
+
 export default function DashboardContent() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      <div className="bg-[#1A1A1A] rounded-lg p-4">
-        {/* Add dashboard content here */}
-      </div>
+    <div className="">
+      <DashboardOverview />
+      <Analytics />
+      <RecentTransactions />
     </div>
   );
 }

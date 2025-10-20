@@ -84,7 +84,7 @@ export default function SuperAdminSidebar({ onMenuSelect, activeMenu }) {
         {menuItems.map((item) => (
           <button
             key={item.name}
-            onClick={() => onMenuSelect(item.component)}
+            onClick={() => onMenuSelect(item.component, item.name)}
             className={`flex items-center w-full space-x-3 px-6 py-3 text-sm font-medium transition ${
               activeMenu === item.name
                 ? "bg-blue-600 text-white"
