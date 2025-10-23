@@ -65,10 +65,10 @@ export default function SuperAdminSidebar({ onMenuSelect, activeMenu }) {
   ];
 
   return (
-    <aside className="bg-[#0f0f0f] text-gray-300 w-64 min-h-screen border-r border-[#1f1f1f] fixed left-0 top-0  ">
+    <aside className="bg-[#0f0f0f] text-gray-300 min-w-70 min-h-screen border-r border-[#1f1f1f]  left-0 top-0  ">
       {/* Logo Section */}
       <div className="flex items-center space-x-2 px-6 py-4">
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="#3B82F6"
           viewBox="0 0 24 24"
@@ -76,7 +76,8 @@ export default function SuperAdminSidebar({ onMenuSelect, activeMenu }) {
         >
           <path d="M12 3l9 7-1.5 1.3L12 5.4 4.5 11.3 3 10l9-7zM4 12h16v8H4v-8zm2 2v4h12v-4H6z" />
         </svg>
-        <h1 className="text-lg font-semibold text-white">Raletale</h1>
+        <h1 className="text-lg font-semibold text-white">Raletale</h1> */}
+        <img src="./logo.jpg" alt="Logo" className="w-44 rounded" />
       </div>
 
       {/* Menu Items */}

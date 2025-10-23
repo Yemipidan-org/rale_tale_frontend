@@ -7,7 +7,7 @@ export default function SuperAdminTopNav() {
   return (
     <nav className="w-full bg-[#0f0f0f] border-b border-[#1f1f1f] text-white px-4 sm:px-6 py-3 flex items-center justify-between">
       {/* LEFT SECTION: Logo */}
-      <div className="flex items-center space-x-2">
+      {/* <div className="flex items-center space-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -17,7 +17,7 @@ export default function SuperAdminTopNav() {
           <path d="M12 3l9 7-1.5 1.3L12 5.4 4.5 11.3 3 10l9-7zM4 12h16v8H4v-8zm2 2v4h12v-4H6z" />
         </svg>
         <span className="text-lg font-semibold">Raletale</span>
-      </div>
+      </div> */}
 
       {/* CENTER: Search Bar */}
       <div className="hidden md:flex items-center bg-[#1c1c1c] rounded-lg px-3 py-1 w-full max-w-xs mx-4">

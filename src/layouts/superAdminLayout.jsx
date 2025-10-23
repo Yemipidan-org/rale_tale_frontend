@@ -16,7 +16,6 @@ export default function SuperAdminLayout() {
 
   return (
     <div className="bg-black min-h-screen text-white">
-      <SuperAdminTopNav />
       <div className="flex">
         <SuperAdminSidebar
           onMenuSelect={(component, menuName) =>
@@ -24,7 +23,10 @@ export default function SuperAdminLayout() {
           }
           activeMenu={activeMenu}
         />
-        <main className="flex-1 p-6 ml-64">{currentComponent}</main>
+        <div className="w-full">
+          <SuperAdminTopNav />
+        <main className="flex-1 p-6 ">{currentComponent}</main>
+        </div>
       </div>
     </div>
   );
