@@ -96,11 +96,14 @@ export default function PropertiesTable() {
                   <p className="text-xs text-gray-500">{property.id}</p>
                 </div>
               </td>
-              <td className="py-3 px-2 sm:px-3 flex items-center space-x-2">
-                <MapPin size={14} className="text-gray-400" />
-                <span>{property.location}</span>
+              <td className="py-3 px-2 sm:px-3  ">
+                <div className="flex items-center space-x-2">
+                  <MapPin size={14} className="text-gray-400" />
+                  <span>{property.location}</span>
+                </div>
               </td>
               <td className="py-3 px-2 sm:px-3">{property.price}</td>
+              {/* <td className="py-3 px-2 sm:px-3">{property.price}</td> */}
               <td className="py-3 px-2 sm:px-3">{property.owner}</td>
               <td className="py-3 px-2 sm:px-3">
                 <span
