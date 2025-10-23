@@ -11,7 +11,9 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SuperAdminLayout from "./layouts/superAdminLayout";
 import DashboardSuperAdmin from "./pages/SuperAdmin/Dashboard";
- 
+import PropertyOwnerLayout from "./layouts/propertyOwnerLayout";
+import DashboardPropertyOwner from "./pages/ProperyOwner/Dashboard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -23,11 +25,9 @@ function App() {
           <Route path="/searchResult" element={<ListingPage />} />
           <Route path="/vi" element={<VirtualInspection />} />
         </Route>
-
         {/* Auth pages (no layout wrapper) */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-
         {/* Protected Dashboard routes */}
         <Route
           element={
@@ -41,7 +41,6 @@ function App() {
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
         </Route>
-
         <Route
           element={
             // <ProtectedRoute>
@@ -54,9 +53,19 @@ function App() {
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
         </Route>
-
-        {/* Catch-all redirect */}
-        <Route path="*" element={<Home />} />
+        <Route
+          element={
+            // <ProtectedRoute>
+            <PropertyOwnerLayout />
+            // </ProtectedRoute>
+          }
+        >
+          <Route path="/propertyOwner" element={<DashboardPropertyOwner />} />
+          {/* later you can add more */}
+          {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
+        </Route>
+        {/* 404 Not Found - must be last */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
