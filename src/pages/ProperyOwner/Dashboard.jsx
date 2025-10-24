@@ -1,8 +1,10 @@
-export default function DashboardPropertyOwner() {
+export default function DashboardContent() {
   return (
-    <div>
-      <h1 className="text-white">Property Owner Dashboard</h1>
-      {/* Add your dashboard content here */}
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Property Owner Dashboard</h1>
+      <div className="bg-[#1A1A1A] rounded-lg p-4">
+        {/* Add dashboard content here */}
+      </div>
     </div>
   );
 }
