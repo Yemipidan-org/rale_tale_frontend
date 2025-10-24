@@ -1,68 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Home,
-  Users,
-  Building2,
-  FileText,
-  Bell,
-  BarChart2,
-  Settings,
-  Wallet,
-} from "lucide-react";
 
-import DashboardContent from "../../pages/SuperAdmin/Dashboard";
-import UsersContent from "../../pages/SuperAdmin/Users";
-import PropertiesContent from "../../pages/SuperAdmin/Properties";
-import TransactionsContent from "../../pages/SuperAdmin/Transactions";
-import DocumentsContent from "../../pages/SuperAdmin/Documents";
-import NotificationsContent from "../../pages/SuperAdmin/Notifications";
-import ReportsContent from "../../pages/SuperAdmin/Reports";
-import SettingsContent from "../../pages/SuperAdmin/Settings";
 
-export default function SuperAdminSidebar({ onMenuSelect, activeMenu }) {
-  const menuItems = [
-    {
-      name: "Dashboard",
-      icon: <Home size={18} />,
-      component: <DashboardContent />,
-    },
-    {
-      name: "Users Management",
-      icon: <Users size={18} />,
-      component: <UsersContent />,
-    },
-    {
-      name: "Property Management",
-      icon: <Building2 size={18} />,
-      component: <PropertiesContent />,
-    },
-    {
-      name: "Transactions",
-      icon: <Wallet size={18} />,
-      component: <TransactionsContent />,
-    },
-    {
-      name: "Legal Documents",
-      icon: <FileText size={18} />,
-      component: <DocumentsContent />,
-    },
-    {
-      name: "Notifications",
-      icon: <Bell size={18} />,
-      component: <NotificationsContent />,
-    },
-    {
-      name: "Reports",
-      icon: <BarChart2 size={18} />,
-      component: <ReportsContent />,
-    },
-    {
-      name: "Settings",
-      icon: <Settings size={18} />,
-      component: <SettingsContent />,
-    },
-  ];
+export default function SuperAdminSidebar({ onMenuSelect, activeMenu, menuItems }) {
+
 
   return (
     <aside className="bg-[#0f0f0f] text-gray-300 min-w-70 min-h-screen border-r border-[#1f1f1f]  left-0 top-0  ">
