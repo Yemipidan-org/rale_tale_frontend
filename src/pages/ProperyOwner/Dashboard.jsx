@@ -1,10 +1,11 @@
+import PropertyManagerOverview from "../../components/PropertyOwner/PropertyManagerOverview";
+import RecentActivities from "../../components/PropertyOwner/RecentActivities";
+
 export default function DashboardContent() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Property Owner Dashboard</h1>
-      <div className="bg-[#1A1A1A] rounded-lg p-4">
-        {/* Add dashboard content here */}
-      </div>
+    <div className="">
+      <PropertyManagerOverview />
+      <RecentActivities />
     </div>
   );
 }
