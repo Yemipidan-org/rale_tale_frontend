@@ -5,6 +5,10 @@ import PropertyLocationForm from "../../components/PropertyOwner/PropertyLocatio
 import PropertyMediaForm from "../../components/PropertyOwner/PropertyMediaForm";
 import PropertyFeaturesForm from "../../components/PropertyOwner/PropertyFeaturesForm";
 import PropertyDocumentsForm from "../../components/PropertyOwner/PropertyDocumentsForm";
+import PropertyRestrictionsForm from "../../components/PropertyOwner/PropertyRestrictionsForm";
+import PropertyTechnicalDetailsForm from "../../components/PropertyOwner/PropertyTechnicalDetailsForm";
+import PropertyContactInformationForm from "../../components/PropertyOwner/PropertyContactInformationForm";
+import PropertyInspectionAndTransactionForm from "../../components/PropertyOwner/PropertyInspectionAndTransactionForm";
 
 export default function PropertyListingForm() {
   const [step, setStep] = useState(1);
@@ -126,6 +130,36 @@ export default function PropertyListingForm() {
           initialData={propertyFeatures}
           onBack={handleBack}
           onNext={handleNext}
+        />
+      )}
+      {step === 6 && (
+        <PropertyRestrictionsForm
+          initialData={propertyRestrictions}
+          onBack={handleBack}
+          onNext={handleNextStep}
+        />
+      )}
+      {step === 7 && (
+        <PropertyTechnicalDetailsForm
+          initialData={technicalDetails}
+          onBack={handleBack}
+          onNext={handleNextStep}
+        />
+      )}
+
+      {step === 8 && (
+        <PropertyContactInformationForm
+          initialData={contactInformation}
+          onBack={handleBack}
+          onNext={handleNextStep}
+        />
+      )}
+
+      {step === 9 && (
+        <PropertyInspectionAndTransactionForm
+          initialData={inspectionAndTransaction}
+          onBack={handleBack}
+          onNext={handleNextStep}
         />
       )}
     </div>
