@@ -9,6 +9,8 @@ import PropertyRestrictionsForm from "../../components/PropertyOwner/PropertyRes
 import PropertyTechnicalDetailsForm from "../../components/PropertyOwner/PropertyTechnicalDetailsForm";
 import PropertyContactInformationForm from "../../components/PropertyOwner/PropertyContactInformationForm";
 import PropertyInspectionAndTransactionForm from "../../components/PropertyOwner/PropertyInspectionAndTransactionForm";
+import PropertyMarketingAndExposureForm from "../../components/PropertyOwner/PropertyMarketingAndExposureForm";
+import PropertyLegalClausesForm from "../../components/PropertyOwner/PropertyLegalClausesForm";
 
 export default function PropertyListingForm() {
   const [step, setStep] = useState(1);
@@ -57,6 +59,51 @@ export default function PropertyListingForm() {
     utilities: [],
   });
 
+  // Add new states for steps 6-11
+  const [propertyRestrictions, setPropertyRestrictions] = useState({
+    ageRestrictions: [],
+    petPolicies: [],
+    occupancyLimits: "",
+    useRestrictions: [],
+  });
+
+  const [technicalDetails, setTechnicalDetails] = useState({
+    buildingAge: "",
+    constructionType: "",
+    roofType: "",
+    foundation: "",
+    utilities: [],
+  });
+
+  const [contactInformation, setContactInformation] = useState({
+    agentName: "",
+    agentPhone: "",
+    agentEmail: "",
+    preferredContactMethod: "",
+    availabilityHours: [],
+  });
+
+  const [inspectionAndTransaction, setInspectionAndTransaction] = useState({
+    inspectionDays: [],
+    inspectionHours: "",
+    paymentMethods: [],
+    documentationRequired: [],
+  });
+
+  const [marketingExposure, setMarketingExposure] = useState({
+    listingVisibility: "",
+    promotionalFeatures: [],
+    specialOffers: "",
+    featuredListing: false,
+  });
+
+  const [legalClauses, setLegalClauses] = useState({
+    termsAndConditions: false,
+    disclaimers: [],
+    privacyPolicy: false,
+    legalDisclosures: [],
+  });
+
   const handleNext = (data) => {
     switch (step) {
       case 1:
@@ -77,24 +124,54 @@ export default function PropertyListingForm() {
         break;
       case 5:
         setPropertyFeatures(data);
-        handleSubmitAll();
+        setStep(6);
+        break;
+      case 6:
+        setPropertyRestrictions(data);
+        setStep(7);
+        break;
+      case 7:
+        setTechnicalDetails(data);
+        setStep(8);
+        break;
+      case 8:
+        setContactInformation(data);
+        setStep(9);
+        break;
+      case 9:
+        setInspectionAndTransaction(data);
+        setStep(10);
+        break;
+      case 10:
+        setMarketingExposure(data);
+        setStep(11);
+        break;
+      case 11:
+        setLegalClauses(data);
+        handleFinalSubmit();
         break;
     }
   };
 
-  const handleBack = () => setStep(step - 1);
-
-  const handleSubmitAll = () => {
+  const handleFinalSubmit = () => {
     const finalData = {
       ...propertyDetails,
       ...propertyLocation,
       ...propertyMedia,
       ...propertyDocs,
       ...propertyFeatures,
+      ...propertyRestrictions,
+      ...technicalDetails,
+      ...contactInformation,
+      ...inspectionAndTransaction,
+      ...marketingExposure,
+      ...legalClauses,
     };
-    console.log("Submitting complete property data:", finalData);
-    alert("Property submitted successfully ✅");
+    console.log("Final submission:", finalData);
+    alert("Property listing submitted successfully! 🎉");
   };
+
+  const handleBack = () => setStep(step - 1);
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white p-4 sm:p-8 space-y-6">
@@ -136,30 +213,43 @@ export default function PropertyListingForm() {
         <PropertyRestrictionsForm
           initialData={propertyRestrictions}
           onBack={handleBack}
-          onNext={handleNextStep}
+          onNext={handleNext}
         />
       )}
       {step === 7 && (
         <PropertyTechnicalDetailsForm
           initialData={technicalDetails}
           onBack={handleBack}
-          onNext={handleNextStep}
+          onNext={handleNext}
         />
       )}
-
       {step === 8 && (
         <PropertyContactInformationForm
           initialData={contactInformation}
           onBack={handleBack}
-          onNext={handleNextStep}
+          onNext={handleNext}
         />
       )}
-
       {step === 9 && (
         <PropertyInspectionAndTransactionForm
           initialData={inspectionAndTransaction}
           onBack={handleBack}
-          onNext={handleNextStep}
+          onNext={handleNext}
+        />
+      )}
+      {step === 10 && (
+        <PropertyMarketingAndExposureForm
+          initialData={marketingExposure}
+          onBack={handleBack}
+          onNext={handleNext}
+        />
+      )}
+      {step === 11 && (
+        <PropertyLegalClausesForm
+          initialData={legalClauses}
+          onBack={handleBack}
+          onNext={handleNext}
+          isFinalStep={true}
         />
       )}
     </div>

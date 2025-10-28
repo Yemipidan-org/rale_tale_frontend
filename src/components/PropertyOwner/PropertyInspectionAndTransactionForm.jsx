@@ -7,14 +7,13 @@ export default function PropertyInspectionAndTransactionForm({
   onBack,
   onNext,
 }) {
-  const [formData, setFormData] = useState(
-    initialData || {
-      inspectionDate: new Date(),
-      processingFee: 150.0,
-      legalFee: 50.0,
-      marketingFee: 25.0,
-    }
-  );
+  const [formData, setFormData] = useState({
+    inspectionDate: format(new Date(), "yyyy-MM-dd"), // Initialize with today's date in correct format
+    processingFee: initialData?.processingFee || 150.0,
+    legalFee: initialData?.legalFee || 50.0,
+    marketingFee: initialData?.marketingFee || 25.0,
+    ...initialData,
+  });
 
   const handleFeeChange = (e) => {
     const { name, value } = e.target;
@@ -59,11 +58,11 @@ export default function PropertyInspectionAndTransactionForm({
           <div className="flex flex-col items-center">
             <input
               type="date"
-              value={format(formData.inspectionDate, "yyyy-MM-dd")}
+              value={formData.inspectionDate}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  inspectionDate: new Date(e.target.value),
+                  inspectionDate: e.target.value,
                 })
               }
               className="bg-[#111] text-white border border-[#2a2a2a] rounded-md px-4 py-2 focus:ring-1 focus:ring-green-600"
@@ -151,3 +150,4 @@ export default function PropertyInspectionAndTransactionForm({
     </form>
   );
 }
+// }
