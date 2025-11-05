@@ -1,145 +1,166 @@
 "use client";
-import { Mail, Lock } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { registerUser } from "../../services/authService";
+import React, { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
-export default function Register() {
+export default function SignupForm() {
   const [formData, setFormData] = useState({
-    fullName: "",
     email: "",
-    telephone: "",
+    phone: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess("");
-
-    try {
-      const data = await registerUser({
-        fullName: formData.fullName,
-        email: formData.email,
-        telephone: formData.telephone,
-        password: formData.password,
-        confirm_password: formData.confirmPassword, // Match backend field name
-      });
-
-      setSuccess("Registration successful! You can now log in.");
-      console.log("Register Response:", data);
-
-      // redirect after success:
-      // navigate("/login");
-    } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          Object.values(err.response?.data || {}).flat().join(" ") ||
-          "Registration failed"
-      );
-      console.error(err.response?.data || err.message);
-    } finally {
-      setLoading(false);
-    }
+    console.log("Form submitted:", formData);
+    // Add your form submission logic (API call, validation, etc.)
   };
 
   return (
-    <div className="min-h-screen bg-[#161616] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-gray-900 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">
-          Create an Account
-        </h2>
+    <div className="min-h-screen flex items-center justify-center bg-[#0d0d0d] px-4">
+      <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-8 space-y-6">
+        {/* Title */}
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Sign Up for Raletale
+          </h2>
+          <p className="text-gray-500 text-sm mt-2">
+            Create your account to start your journey.
+          </p>
+        </div>
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-        {success && <p className="text-green-500 text-sm mb-2">{success}</p>}
-
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
-          />
-
-          <div className="flex items-center">
-            <Mail className="mr-2 text-gray-400" />
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">
+              Email
+            </label>
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
               value={formData.email}
               onChange={handleChange}
+              placeholder="your@example.com"
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center">
+          {/* Phone */}
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">
+              Phone
+            </label>
             <input
-              type="text"
-              name="telephone"
-              placeholder="Telephone"
-              value={formData.telephone}
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="+1 (555) 123-4567"
+              required
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            />
+          </div>
+
+          {/* Role Selection */}
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">
+              Role
+            </label>
+            <select
+              name="role"
+              value={formData.role}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
-            />
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-green-500 focus:outline-none"
+            >
+              <option value="">Select a Role</option>
+              <option value="owner">Owner</option>
+              <option value="agent">Agent</option>
+              <option value="user">User</option>
+            </select>
           </div>
 
-          <div className="flex items-center">
-            <Lock className="mr-2 text-gray-400" />
+          {/* Password */}
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">
+              Password
+            </label>
             <input
               type="password"
               name="password"
-              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
+              placeholder="Enter your password"
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center">
-            <Lock className="mr-2 text-gray-400" />
+          {/* Confirm Password */}
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirm Password"
               value={formData.confirmPassword}
               onChange={handleChange}
+              placeholder="Confirm your password"
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
           </div>
 
+          {/* Forgot Password */}
+          <div className="text-right">
+            <a
+              href="#"
+              className="text-sm text-blue-600 hover:underline font-medium"
+            >
+              Forgot Password?
+            </a>
+          </div>
+
+          {/* Sign Up Button */}
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg font-semibold text-black"
-            disabled={loading}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2.5 rounded-lg transition-all"
           >
-            {loading ? "Signing Up..." : "Sign Up"}
+            Sign Up
           </button>
+
+          {/* OR divider */}
+          {/* <div className="flex items-center my-4">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="mx-3 text-gray-400 text-sm">OR</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div> */}
+
+          {/* Google Button */}
+          {/* <button
+            type="button"
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition-all"
+          >
+            <FcGoogle size={20} />
+            Continue with Google
+          </button> */}
         </form>
 
-        <div className="text-center mt-4 text-sm text-gray-400">
-          Already have an account?{" "}
-          <Link to="/login" className="text-green-400 font-medium">
-            Log in
-          </Link>
-        </div>
+        {/* Footer */}
+        <p className="text-xs text-gray-500 text-center mt-6">
+          By signing up, you agree to Raletale{" "}
+          <a href="#" className="text-blue-600 hover:underline">
+            Terms & Privacy
+          </a>
+        </p>
       </div>
     </div>
   );
