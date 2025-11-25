@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://66.23.230.126/api", // change to production URL later
+  baseURL: "https://rale-tale-backend.onrender.com/api",
 });
 
 API.interceptors.request.use((config) => {
@@ -11,5 +11,21 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Response interceptor for token refresh
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired, clear storage and redirect to login
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default API;

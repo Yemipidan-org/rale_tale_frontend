@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home/home";
 import ListingPage from "./pages/searchResultPage/page";
@@ -15,6 +15,21 @@ import PropertyOwnerLayout from "./layouts/propertyOwnerLayout";
 import DashboardPropertyOwner from "./pages/ProperyOwner/Dashboard";
 import NotFound from "./pages/NotFound";
 
+// Role-based redirect component
+const RoleBasedRedirect = () => {
+  const userRole = localStorage.getItem("userRole");
+
+  switch (userRole?.toLowerCase()) {
+    case "admin":
+      return <Navigate to="/superAdmin" replace />;
+    case "owner":
+    case "agent":
+      return <Navigate to="/propertyOwner" replace />;
+    default:
+      return <Navigate to="/dashboard" replace />;
+  }
+};
+
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +43,7 @@ function App() {
         {/* Auth pages (no layout wrapper) */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+
         {/* Protected Dashboard routes */}
         <Route
           element={
@@ -36,34 +52,31 @@ function App() {
             </ProtectedRoute>
           }
         >
+          {/* User Dashboard */}
           <Route path="/dashboard" element={<Dashboard />} />
           {/* later you can add more */}
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
         </Route>
-        <Route
-          element={
-            // <ProtectedRoute>
-            <SuperAdminLayout />
-            // </ProtectedRoute>
-          }
-        >
+
+        {/* SuperAdmin */}
+        <Route element={<SuperAdminLayout />}>
           <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
           {/* later you can add more */}
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
           {/* <Route path="/dashboard/settings" element={<Settings />} /> */}
         </Route>
-        <Route
-          element={
-            // <ProtectedRoute>
-            <PropertyOwnerLayout />
-            // </ProtectedRoute>
-          }
-        >
+
+        {/* Property Owner or agent */}
+        <Route element={<PropertyOwnerLayout />}>
           <Route path="/propertyOwner" element={<DashboardPropertyOwner />} />
           {/* later you can add more */}
           {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
         </Route>
+
+        {/* Role-based redirect for dashboard root */}
+        <Route path="/dashboard-redirect" element={<RoleBasedRedirect />} />
+
         {/* 404 Not Found - must be last */}
         <Route path="*" element={<NotFound />} />
       </Routes>
